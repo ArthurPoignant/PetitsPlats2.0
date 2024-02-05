@@ -1,0 +1,252 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+/* Header section */
+
+header {
+  display: flex;
+  flex-direction: column;
+  width: 1440px;
+  height: 667px;
+  background-image: url("../assets/banner.jpeg");
+  background-size: cover;
+}
+
+.banner-text {
+  width: 890px;
+  height: 132px;
+  font-family: "Anton", sans-serif;
+  font-size: 44px;
+  color: #ffd15b;
+  margin: 0 auto;
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.banner-logo {
+  width: 207px;
+  height: 25px;
+  position:relative;
+  margin: 51px 0px 0px 69px;
+}
+
+.search-section {
+    margin: auto;
+    gap: 100px;
+}
+
+.searchbar-div {
+    display: flex;
+    justify-content: center;
+    position: relative;
+    width: 954px;
+    height: 72px;
+    margin: 0 auto;
+}
+
+.searchbar-icon {
+    position: absolute;
+    width: 51px;
+    height: 52px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 27px;
+    color: white;
+    background-color: #1B1B1B;
+    border-radius: 5px;
+    right: 10px;
+    top: 10px;
+}
+
+#banner-searchbar {
+    position: absolute;
+    width: 954px;
+    height: 72px;
+    margin: 0 auto;
+    border-radius: 5px;
+    border: none;
+}
+
+#banner-searchbar::placeholder {
+    font-family: 'Manrope', sans-serif;
+    font-size: 16px;
+    padding-left: 40px;
+}
+
+/* Main section */
+
+main {
+  width: 1440px;
+  background-color: #E5E5E5;
+}
+
+.filter-section {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin: 0px 100px;
+}
+
+.filter-dropdown_section {
+  display: flex;
+  flex-direction: row;
+  gap: 60px;
+}
+
+.filter-dropdown {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background-color: #ffff;
+  border-radius: 11px;
+  margin: 10px 0px;
+}
+
+.filter-dropdown_top {
+  width: 150px;
+  height: 56px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0px 20px;
+}
+
+.filter-dropdown_bottom {
+  display: none;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.filter-dropdown:hover .filter-dropdown_bottom {
+  display: flex;
+}
+
+.filter-dropdown_arrow {
+  position: relative;
+  margin-right: 10px;
+}
+
+.filter-dropdown_title {
+  font-family: 'Manrope', sans-serif;
+}
+
+.filter-dropdown_arrow {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.arrow-up {
+  display: none;
+  position: absolute;
+  justify-content: center;
+  align-items: center;
+}
+
+.arrow-down {
+  display: flex;
+  position: absolute;
+  justify-content: center;
+  align-items: center;
+}
+
+.filter-dropdown:hover .arrow-down {
+  display: none;
+}
+
+.filter-dropdown:hover .arrow-up {
+  display: block;
+}
+
+
+.filter-amount {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.filter-amount p {
+  font-family: "Anton", sans-serif;
+  font-size: 21px;
+}
+
+.recipe-section {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  margin: 0px 100px;
+}
+
+.card {
+  width: 380px;
+  height: 731px;
+  border-radius: 21px;
+  background-color: white;
+  overflow: hidden;
+  margin: 30px 0px;
+}
+
+.card img {
+  width: 380px;
+  height: 253px;
+  object-fit:cover;
+}
+
+.card h2 {
+  font-family: "Anton", sans-serif;
+  font-size: 18px;
+  margin: 30px 30px;
+}
+
+.card p {
+  font-family: 'Manrope', sans-serif;
+  font-size: 14px;
+  margin: 20px 30px;
+}
+
+.card-section_title {
+  font-family: 'Manrope', sans-serif;
+  font-size: 12px;
+  color: #7A7A7A;
+  margin: 20px 30px;
+  letter-spacing: 1px;
+}
+
+.card-recette p{
+  height: 76px;
+  overflow: hidden;
+}
+
+  
+/*.card-ingredients {
+  margin: 0px 100px;
+}*/
+
+.ingredients-container {
+  display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    flex-direction: row;
+    margin-left: 30px
+}
+
+.ingredients-container p {
+  font-family: 'Manrope', sans-serif;
+  font-size: 14px;
+  color: #7A7A7A;
+  margin: 0;
+}
+
+.ingredients-container h1 {
+  font-family: 'Manrope', sans-serif;
+  font-size: 14px;
+}
+
+.ingredients-div {
+  width: 150px;
+  margin-bottom: 20px;
+}
