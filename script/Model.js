@@ -3,56 +3,40 @@ import { recipes } from '../data/recipes.js'
 class Model {
     static data = null;
     async getData() {
-      if (this.data == null) {
-        this.data = recipes;
-      }
+        if (this.data == null) {
+            this.data = recipes;
+        }
 
-      return this.data;
+        return this.data;
     }
 
-    async getRecipesById(id) {
-        let listRecipes = await this.getData();
-        for (const recipe of listRecipes) {
-          if (recipe.id == id) {
-            return recipe;
-          }
-        }
-        return null;
+    async getAppliances() {
+        const data = await this.getData();
+        const appliances = data.map(recipe => recipe.appliance);
+        return [...new Set(appliances)];
     }
 
-    /*async getListUstensils() {
-        let listRecipes = await this.getData();
-        let ustensilsList = [];
-        for (const recipe of listRecipes) {
-            ustensilsList += recipe.ustensils;
-            return ustensilsList;
-        }
-        return null;
+    async getUstensils() {
+        const data = await this.getData();
+        const ustensils = data.reduce((acc, recipe) => {
+            acc.push(...recipe.ustensils);
+            return acc;
+        }, []);
+        return [...new Set(ustensils)];
     }
 
-    async getListUstensils(){
-        let listRecipes = await this.getData();
-        for (let i = 0; i < listRecipes.length; i++) {
-            return listRecipes[i].ustensils
-            
-        }
+    async getIngredients() {
+        const data = await this.getData();
+        const ingredients = data.reduce((accumulator, recipe) => {
+            recipe.ingredients.forEach(ingredient => {
+                accumulator.push(ingredient.ingredient);
+            });
+            return [...new Set(accumulator)];
+        }, []);
+        return [...new Set(ingredients)];
     }
+}
 
-    async getListAppliances() {
-        let listRecipes = await this.getData();
-        for (const recipe of listRecipes) {
-            return recipe.appliance;
-        }
-        return null;
-    }
-
-    async getListIngredients() {
-        let listRecipes = await this.getData();
-        for (const recipe of listRecipes) {
-            return recipe.ingredients;
-        }
-        return null;
-    }*/
-}  
+//console.log(Model.getAppliances())
 
 export default Model;

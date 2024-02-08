@@ -28,101 +28,168 @@ header {
 .banner-logo {
   width: 207px;
   height: 25px;
-  position:relative;
+  position: relative;
   margin: 51px 0px 0px 69px;
 }
 
 .search-section {
-    margin: auto;
-    gap: 100px;
+  margin: auto;
+  gap: 100px;
 }
 
 .searchbar-div {
-    display: flex;
-    justify-content: center;
-    position: relative;
-    width: 954px;
-    height: 72px;
-    margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  position: relative;
+  width: 954px;
+  height: 72px;
+  margin: 0 auto;
 }
 
 .searchbar-icon {
-    position: absolute;
-    width: 51px;
-    height: 52px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 27px;
-    color: white;
-    background-color: #1B1B1B;
-    border-radius: 5px;
-    right: 10px;
-    top: 10px;
+  position: absolute;
+  width: 51px;
+  height: 52px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 27px;
+  color: white;
+  background-color: #1b1b1b;
+  border-radius: 5px;
+  right: 10px;
+  top: 10px;
 }
 
 #banner-searchbar {
-    position: absolute;
-    width: 954px;
-    height: 72px;
-    margin: 0 auto;
-    border-radius: 5px;
-    border: none;
+  position: absolute;
+  width: 954px;
+  height: 72px;
+  margin: 0 auto;
+  border-radius: 5px;
+  border: none;
 }
 
 #banner-searchbar::placeholder {
-    font-family: 'Manrope', sans-serif;
-    font-size: 16px;
-    padding-left: 40px;
+  font-family: "Manrope", sans-serif;
+  font-size: 16px;
+  padding-left: 40px;
 }
 
 /* Main section */
 
 main {
   width: 1440px;
-  background-color: #E5E5E5;
+  background-color: #e5e5e5;
 }
 
 .filter-section {
+  height: 80px;
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: end;
   margin: 0px 100px;
+  z-index: 1000;
 }
 
 .filter-dropdown_section {
   display: flex;
   flex-direction: row;
   gap: 60px;
+  position: absolute;
+  left: 100px;
 }
 
 .filter-dropdown {
+  width: 150px;
+  height: 56px;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
   background-color: #ffff;
   border-radius: 11px;
-  margin: 10px 0px;
+  padding: 0px 20px;
+  margin: 10px 10px;
+  z-index: 10;
+  overflow: visible;
 }
 
 .filter-dropdown_top {
-  width: 150px;
+  width: 100%;
   height: 56px;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  margin: 0px 20px;
-}
-
-.filter-dropdown_bottom {
-  display: none;
-  justify-content: center;
-  z-index: 1000;
 }
 
 .filter-dropdown:hover .filter-dropdown_bottom {
   display: flex;
+}
+
+.filter-dropdown:hover {
+  height: 100%;
+}
+
+.filter-dropdown_bottom {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.filter-dropdown_bottom input {
+  border-style: solid;
+  width: 150px;
+  height: 36px;
+  border-width: 1px;
+  border-radius: 2px;
+  border-color: #c6c6c6;
+  color: #7A7A7A;
+  padding: 0.2em 2em 0.2em 0.5em;
+  font-family: "Manrope", sans-serif;
+}
+
+.filter-dropdown_bottom input:focus {
+  border-style: solid;
+  width: 150px;
+  height: 36px;
+  border-width: 1px;
+  border-radius: 2px;
+  border-color: #c6c6c6;
+  color: #7A7A7A;
+  padding: 0.2em 2em 0.2em 0.5em;
+  font-family: "Manrope", sans-serif;
+  outline: none;
+} 
+
+.magnifying-glass {
+  font-size: 14px;
+  color: #7a7a7a;
+  position: absolute;
+  right: 30px;
+  top: 67px;
+}
+
+.list-element {
+  display: flex;
+  justify-content:flex-start;
+  align-items: center;
+  width: 150px;
+  height: 37px;
+  font-family: "Manrope", sans-serif;
+  font-size: 14px;
+  color: #1b1b1b;
+}
+
+.result-ingredients,.result-ustensils, .result-appareils{
+  margin-top: 10px;
+}
+
+.list-element:hover {
+  background-color: #FFD15B;
 }
 
 .filter-dropdown_arrow {
@@ -131,7 +198,7 @@ main {
 }
 
 .filter-dropdown_title {
-  font-family: 'Manrope', sans-serif;
+  font-family: "Manrope", sans-serif;
 }
 
 .filter-dropdown_arrow {
@@ -162,7 +229,6 @@ main {
   display: block;
 }
 
-
 .filter-amount {
   display: flex;
   justify-content: center;
@@ -172,6 +238,35 @@ main {
 .filter-amount p {
   font-family: "Anton", sans-serif;
   font-size: 21px;
+}
+
+.tag-section {
+  display: flex;
+  flex-direction: row;
+  justify-content: start;
+  flex-wrap: wrap;
+  margin: 0px 100px;
+  gap: 60px;
+}
+
+.tag {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 190px;
+  height: 56px;
+  background-color: #FFD15B;
+  font-size: 14px;
+  font-family: "Manrope", sans-serif;
+  border-radius: 11px;
+}
+
+.delete-x {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 14px;
+  z-index: 12;
 }
 
 .recipe-section {
@@ -193,7 +288,7 @@ main {
 .card img {
   width: 380px;
   height: 253px;
-  object-fit:cover;
+  object-fit: cover;
 }
 
 .card h2 {
@@ -203,46 +298,45 @@ main {
 }
 
 .card p {
-  font-family: 'Manrope', sans-serif;
+  font-family: "Manrope", sans-serif;
   font-size: 14px;
   margin: 20px 30px;
 }
 
 .card-section_title {
-  font-family: 'Manrope', sans-serif;
+  font-family: "Manrope", sans-serif;
   font-size: 12px;
-  color: #7A7A7A;
+  color: #7a7a7a;
   margin: 20px 30px;
   letter-spacing: 1px;
 }
 
-.card-recette p{
+.card-recette p {
   height: 76px;
   overflow: hidden;
 }
 
-  
 /*.card-ingredients {
   margin: 0px 100px;
 }*/
 
 .ingredients-container {
   display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    flex-direction: row;
-    margin-left: 30px
+  flex-wrap: wrap;
+  justify-content: space-between;
+  flex-direction: row;
+  margin-left: 30px;
 }
 
 .ingredients-container p {
-  font-family: 'Manrope', sans-serif;
+  font-family: "Manrope", sans-serif;
   font-size: 14px;
-  color: #7A7A7A;
+  color: #7a7a7a;
   margin: 0;
 }
 
 .ingredients-container h1 {
-  font-family: 'Manrope', sans-serif;
+  font-family: "Manrope", sans-serif;
   font-size: 14px;
 }
 
