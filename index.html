@@ -115,12 +115,14 @@
         <div class="searchbar-div">
           <input
             type="text"
-            id="banner-searchbar"
+            id="searchbar-banner"
             name="banner searchbar"
             placeholder="Rechercher une recette, un ingrédient, ..."
+            minlength="3"
           />
           <i class="fa-solid fa-magnifying-glass searchbar-icon"></i>
         </div>
+        <div class="result-banner"></div>
       </div>
     </header>
     <main>
@@ -135,7 +137,11 @@
               </div>
             </div>
             <div class="filter-dropdown_bottom">
-              <input type="search" name="searchbar" id="searchbar-ingredients" />
+              <input
+                type="search"
+                name="searchbar"
+                id="searchbar-ingredients"
+              />
               <i class="fa-solid fa-magnifying-glass magnifying-glass"></i>
               <div class="result-ingredients"></div>
             </div>

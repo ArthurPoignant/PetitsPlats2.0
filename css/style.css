@@ -1,6 +1,7 @@
 * {
   margin: 0;
   padding: 0;
+  overflow-x: clip;
 }
 
 /* Header section */
@@ -61,7 +62,7 @@ header {
   top: 10px;
 }
 
-#banner-searchbar {
+#searchbar-banner {
   position: absolute;
   width: 954px;
   height: 72px;
@@ -70,10 +71,27 @@ header {
   border: none;
 }
 
-#banner-searchbar::placeholder {
+#searchbar-banner::placeholder {
   font-family: "Manrope", sans-serif;
   font-size: 16px;
   padding-left: 40px;
+}
+
+#searchbar-banner:hover .result-banner{
+  display: flex
+}
+
+.result-banner {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 150px;
+  font-family: "Manrope", sans-serif;
+  font-size: 14px;
+  color: #1b1b1b;
+  background-color: white;
+  z-index: 1000000;
 }
 
 /* Main section */
@@ -101,7 +119,7 @@ main {
 }
 
 .filter-dropdown {
-  width: 150px;
+  width: 195px;
   height: 56px;
   display: flex;
   flex-direction: column;
@@ -110,8 +128,7 @@ main {
   position: relative;
   background-color: #ffff;
   border-radius: 11px;
-  padding: 0px 20px;
-  margin: 10px 10px;
+  margin: 10px 0px;
   z-index: 10;
   overflow: visible;
 }
@@ -121,7 +138,7 @@ main {
   height: 56px;
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: space-around;
   align-items: center;
 }
 
@@ -175,9 +192,9 @@ main {
 
 .list-element {
   display: flex;
-  justify-content:flex-start;
+  justify-content:space-around;
   align-items: center;
-  width: 150px;
+  width: 195px;
   height: 37px;
   font-family: "Manrope", sans-serif;
   font-size: 14px;
@@ -195,28 +212,25 @@ main {
 .filter-dropdown_arrow {
   position: relative;
   margin-right: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .filter-dropdown_title {
   font-family: "Manrope", sans-serif;
 }
 
-.filter-dropdown_arrow {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
 .arrow-up {
   display: none;
-  position: absolute;
+  /*position: absolute;*/
   justify-content: center;
   align-items: center;
 }
 
 .arrow-down {
   display: flex;
-  position: absolute;
+  /*position: absolute;*/
   justify-content: center;
   align-items: center;
 }
@@ -266,7 +280,7 @@ main {
   justify-content: center;
   align-items: center;
   font-size: 14px;
-  z-index: 12;
+  z-index: 2;
 }
 
 .recipe-section {

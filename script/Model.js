@@ -35,8 +35,29 @@ class Model {
         }, []);
         return [...new Set(ingredients)];
     }
-}
 
-//console.log(Model.getAppliances())
+    async getDescriptions() {
+        const data = await this.getData();
+        const descriptions = data.map(recipe => recipe.description);
+        return [...new Set(descriptions)];
+    }
+
+    async getAll() {
+        const asyncFunctions = [
+            this.getAppliances(),
+            this.getIngredients(),
+            this.getUstensils(),
+            this.getDescriptions()
+        ];
+        const all = (await Promise.all(asyncFunctions)).reduce((accumulator, all) => {
+            all.forEach(all => {
+                accumulator.push(all);
+            });
+            return [...new Set(accumulator)];
+        }, []);
+
+        return all;
+    }
+}
 
 export default Model;

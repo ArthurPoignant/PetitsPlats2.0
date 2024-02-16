@@ -1,9 +1,40 @@
 import Model from './model.js';
 
-// display section
+// Initialisation de la page
 
+async function initializeRecipePage() {
+    const model = new Model();
+
+    const [listRecipes, listUstensils, listAppliances, listIngredients, listDescritpions, listAll] = await Promise.all([
+        model.getData(),
+        model.getUstensils(),
+        model.getAppliances(),
+        model.getIngredients(),
+        model.getDescriptions(),
+        model.getAll()
+    ]);
+
+    const lists = [
+        { data: listIngredients, name: 'ingredients' },
+        { data: listAppliances, name: 'appareils' },
+        { data: listUstensils, name: 'ustensils' },
+        { data: listAll, name: 'banner' }
+    ];
+
+    displayRecipes(listRecipes);
+    lists.forEach(({ data, name }) => {
+        displayList(data, name);
+        handleListSearch(data, name);
+        displayTag(name, listRecipes);
+    });
+}
+
+let tagArray = [];
+
+// affiche une liste de recette
 function displayRecipes(list) {
     const container = document.querySelector(".recipe-section");
+    container.innerHTML = ''
     for (let i = 0; i < list.length; i++) {
         const recipeId = list[i].id;
         const recipeName = list[i].name;
@@ -44,6 +75,7 @@ function displayRecipes(list) {
     }
 }
 
+// affiche les listes d'éléments en dessous des champs de recherche
 function displayList(list, listName) {
     let container = document.querySelector(".result-" + CSS.escape(listName))
     container.innerHTML = ''
@@ -54,35 +86,118 @@ function displayList(list, listName) {
     }
 }
 
-function tagArray() {
-    let tagArray = []
-}
-
-function displayTag(listName) {
-    let tagArray = []
+// affiche les tags
+function displayTag(listName, listRecipes) {
     let container = document.querySelector(".tag-section")
     document.querySelector('.result-' + CSS.escape(listName)).addEventListener("click", (e) => {
         let value = e.target.innerText;
 
         if (tagArray.includes(value) === false) {
-            tagArray.push(value);
             container.innerHTML += `
-    <div class="tag">
-    <p>${value}</p>
-    <i class="fa-solid fa-xmark delete-x"></i>
-    </div>
-    `
+            <div class="tag">
+              <p>${value}</p>
+              <i class="fa-solid fa-xmark delete-x"></i>
+            </div>
+            `;
+            tagArray.push(value);
         }
-        console.log(tagArray)
+        displayRecipesByTag(listRecipes, tagArray,listName)
     }
     )
-    deleteTag(tagArray)
-    console.log(tagArray)
+    deleteTag()
+}
+
+function displayRecipesByTag(listRecipes, tagArray, tagType) {
+    let newRecipeArray = [];
+
+    for (let i = 0; i < tagArray.length; i++) {
+        for (let j = 0; j < listRecipes.length; j++) {
+            if (tagType === 'appareils') {
+                if (listRecipes[j].appliance.localeCompare(tagArray[i]) === 0) {
+                    if (!newRecipeArray.includes(listRecipes[j])) {
+                        newRecipeArray.push(listRecipes[j]);
+                    }
+                }
+            } else if (tagType === 'ustensils') {
+                for (let k = 0; k < listRecipes[j].ustensils.length; k++) {
+                    if (listRecipes[j].ustensils[k].localeCompare(tagArray[i]) === 0) {
+                        if (!newRecipeArray.includes(listRecipes[j])) {
+                            newRecipeArray.push(listRecipes[j]);
+                        }
+                    }
+                }
+            } else if (tagType === 'ingredients') {
+                for (let k = 0; k < listRecipes[j].ingredients.length; k++) {
+                    if (listRecipes[j].ingredients[k].ingredient.localeCompare(tagArray[i]) === 0) {
+                        if (!newRecipeArray.includes(listRecipes[j])) {
+                            newRecipeArray.push(listRecipes[j]);
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    displayRecipes(newRecipeArray);
 }
 
 
+// a
+/*function displayRecipesByTagAppliance(listRecipes, tagArray) {
+    let newRecipeArray = [];
+    for (let i = 0; i < tagArray.length; i++) {
+        for (let j = 0; j < listRecipes.length; j++) {
 
-function deleteTag(tagArray) {
+            console.log(listRecipes[j].appliance.localeCompare(tagArray[i]))
+            if (listRecipes[j].appliance.localeCompare(tagArray[i]) === 0) {
+                newRecipeArray.push(listRecipes[j])
+                displayRecipes(newRecipeArray);
+            }
+        }
+    }
+
+}
+
+function displayRecipesByTagUstensils(listRecipes, tagArray) {
+    let newRecipeArray = [];
+
+    for (let i = 0; i < tagArray.length; i++) {
+        for (let j = 0; j < listRecipes.length; j++) {
+            for (let k = 0; k < listRecipes[j].ustensils.length; k++) {
+                if (listRecipes[j].ustensils[k].localeCompare(tagArray[i]) === 0) {
+                    if (!newRecipeArray.includes(listRecipes[j])) {
+                        newRecipeArray.push(listRecipes[j]);
+                    }
+                }
+            }
+        }
+    }
+
+    displayRecipes(newRecipeArray);
+}
+
+function displayRecipesByTagIngredients(listRecipes, tagArray) {
+    let newRecipeArray = [];
+
+    for (let i = 0; i < tagArray.length; i++) {
+        for (let j = 0; j < listRecipes.length; j++) {
+            for (let k = 0; k < listRecipes[j].ingredients.length; k++) {
+                if (listRecipes[j].ingredients[k].ingredient.localeCompare(tagArray[i]) === 0) {
+                    if (!newRecipeArray.includes(listRecipes[j])) {
+                        newRecipeArray.push(listRecipes[j]);
+                    }
+                }
+                //console.log(listRecipes[j].ingredients[k].ingredient)
+                
+            }
+        }
+    }
+
+    displayRecipes(newRecipeArray);
+}*/
+
+// supprime les tags
+function deleteTag() {
     const container = document.querySelector(".tag-section");
 
     container.addEventListener("click", (e) => {
@@ -91,60 +206,32 @@ function deleteTag(tagArray) {
             const value = tag.querySelector("p").textContent;
             tagArray = tagArray.filter(tagValue => tagValue !== value);
             tag.remove();
-            return tagArray;
         }
     });
 }
 
-// search section
-
-function searchElement(searchInput, list) {
-    let ResultArray = []
+// renvoie les éléments contenant la valeur du champ de recherche
+function filterListBySearchInput(searchInput, list) {
+    let resultArray = []
     for (let i = 0; i < list.length; i++) {
         if ((list[i].toLowerCase()).includes(searchInput.toLowerCase())) {
-            ResultArray.push(list[i])
+            resultArray.push(list[i])
         }
 
     }
-    return ResultArray
+    return resultArray
 }
 
-function searchListener(list, listName) {
+// détecte l'éntrée dans le champ de recherche et lance les fonctions associées
+function handleListSearch(list, listName) {
     document.querySelector('#searchbar-' + CSS.escape(listName)).addEventListener("input", (e) => {
         let value = e.target.value
-        let array = searchElement(value, list)
-        searchElement(value, list)
+        let array = filterListBySearchInput(value, list)
+        filterListBySearchInput(value, list)
         displayList(array, listName)
     }
     )
 }
 
-
-
-// page init
-
-async function initializeRecipePage() {
-    const model = new Model();
-
-    const [listRecipes, listUstensils, listAppliances, listIngredients] = await Promise.all([
-        model.getData(),
-        model.getUstensils(),
-        model.getAppliances(),
-        model.getIngredients()
-    ]);
-
-    const lists = [
-        { data: listIngredients, name: 'ingredients' },
-        { data: listAppliances, name: 'appareils' },
-        { data: listUstensils, name: 'ustensils' }
-    ];
-
-    displayRecipes(listRecipes);
-    lists.forEach(({ data, name }) => {
-        displayList(data, name);
-        searchListener(data, name);
-        displayTag(name);
-    });
-}
 
 initializeRecipePage();
