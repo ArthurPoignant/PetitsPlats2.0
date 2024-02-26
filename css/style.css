@@ -77,21 +77,29 @@ header {
   padding-left: 40px;
 }
 
-#searchbar-banner:hover .result-banner{
-  display: flex
-}
-
 .result-banner {
   display: none;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 150px;
+  width: 954px;
   font-family: "Manrope", sans-serif;
   font-size: 14px;
   color: #1b1b1b;
   background-color: white;
-  z-index: 1000000;
+  position: absolute;
+  z-index: 1000;
+  overflow: hidden;
+}
+
+.result-banner .list-element {
+  width: 954px;
+  max-width: 954px;
+  min-height: 37px;
+  overflow:auto;
+  justify-content: flex-start;
+  padding-top: 5px;
+  padding-bottom: 5px;
 }
 
 /* Main section */
@@ -195,7 +203,7 @@ main {
   justify-content:space-around;
   align-items: center;
   width: 195px;
-  height: 37px;
+  min-height: 37px;
   font-family: "Manrope", sans-serif;
   font-size: 14px;
   color: #1b1b1b;
@@ -275,6 +283,14 @@ main {
   border-radius: 11px;
 }
 
+.error-msg {
+  font-size: 14px;
+  font-family: "Manrope", sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .delete-x {
   display: flex;
   justify-content: center;
@@ -288,6 +304,28 @@ main {
   justify-content: space-between;
   flex-wrap: wrap;
   margin: 0px 100px;
+}
+
+.recipe-section .error-msg {
+  width: 100%;
+  height: 600px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.timer {
+  width: 63px;
+  height: 26px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #ffd15b;
+  position: relative;
+  bottom: 690px;
+  left: 265px;
+  border-radius: 14px;
+  font-size: 12px;
 }
 
 .card {

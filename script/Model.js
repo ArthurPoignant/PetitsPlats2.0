@@ -10,6 +10,12 @@ class Model {
         return this.data;
     }
 
+    async getTitles() {
+        const data = await this.getData();
+        const titles = data.map(recipe => recipe.name);
+        return [...new Set(titles)];
+    }
+
     async getAppliances() {
         const data = await this.getData();
         const appliances = data.map(recipe => recipe.appliance);
@@ -43,10 +49,10 @@ class Model {
     }
 
     async getAll() {
+        const data = await this.getData();
         const asyncFunctions = [
-            this.getAppliances(),
+            this.getTitles(),
             this.getIngredients(),
-            this.getUstensils(),
             this.getDescriptions()
         ];
         const all = (await Promise.all(asyncFunctions)).reduce((accumulator, all) => {
