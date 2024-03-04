@@ -77,6 +77,10 @@ header {
   padding-left: 40px;
 }
 
+#searchbar-banner input {
+  padding-left: 40px;
+}
+
 .result-banner {
   display: none;
   flex-direction: column;
@@ -317,15 +321,16 @@ main {
 .timer {
   width: 63px;
   height: 26px;
+  margin: 20px 20px !important;
   display: flex;
   justify-content: center;
   align-items: center;
   background-color: #ffd15b;
-  position: relative;
+  position: sticky;
   bottom: 690px;
-  left: 265px;
+  left: 328px;
   border-radius: 14px;
-  font-size: 12px;
+  font-size: 12px !important; 
 }
 
 .card {

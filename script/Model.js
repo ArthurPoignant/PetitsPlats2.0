@@ -1,69 +1,71 @@
-import { recipes } from '../data/recipes.js'
+/* eslint-disable no-shadow */
+// eslint-disable-next-line import/extensions
+import { recipes } from '../data/recipes.js';
 
 class Model {
-    static data = null;
-    async getData() {
-        if (this.data == null) {
-            this.data = recipes;
-        }
+  static data = null;
 
-        return this.data;
+  async getData() {
+    if (this.data == null) {
+      this.data = recipes;
     }
 
-    async getTitles() {
-        const data = await this.getData();
-        const titles = data.map(recipe => recipe.name);
-        return [...new Set(titles)];
-    }
+    return this.data;
+  }
 
-    async getAppliances() {
-        const data = await this.getData();
-        const appliances = data.map(recipe => recipe.appliance);
-        return [...new Set(appliances)];
-    }
+  async getTitles() {
+    const data = await this.getData();
+    const titles = data.map((recipe) => recipe.name);
+    return [...new Set(titles)];
+  }
 
-    async getUstensils() {
-        const data = await this.getData();
-        const ustensils = data.reduce((acc, recipe) => {
-            acc.push(...recipe.ustensils);
-            return acc;
-        }, []);
-        return [...new Set(ustensils)];
-    }
+  async getAppliances() {
+    const data = await this.getData();
+    const appliances = data.map((recipe) => recipe.appliance);
+    return [...new Set(appliances)];
+  }
 
-    async getIngredients() {
-        const data = await this.getData();
-        const ingredients = data.reduce((accumulator, recipe) => {
-            recipe.ingredients.forEach(ingredient => {
-                accumulator.push(ingredient.ingredient);
-            });
-            return [...new Set(accumulator)];
-        }, []);
-        return [...new Set(ingredients)];
-    }
+  async getUstensils() {
+    const data = await this.getData();
+    const ustensils = data.reduce((acc, recipe) => {
+      acc.push(...recipe.ustensils);
+      return acc;
+    }, []);
+    return [...new Set(ustensils)];
+  }
 
-    async getDescriptions() {
-        const data = await this.getData();
-        const descriptions = data.map(recipe => recipe.description);
-        return [...new Set(descriptions)];
-    }
+  async getIngredients() {
+    const data = await this.getData();
+    const ingredients = data.reduce((accumulator, recipe) => {
+      recipe.ingredients.forEach((ingredient) => {
+        accumulator.push(ingredient.ingredient);
+      });
+      return [...new Set(accumulator)];
+    }, []);
+    return [...new Set(ingredients)];
+  }
 
-    async getAll() {
-        const data = await this.getData();
-        const asyncFunctions = [
-            this.getTitles(),
-            this.getIngredients(),
-            this.getDescriptions()
-        ];
-        const all = (await Promise.all(asyncFunctions)).reduce((accumulator, all) => {
-            all.forEach(all => {
-                accumulator.push(all);
-            });
-            return [...new Set(accumulator)];
-        }, []);
+  async getDescriptions() {
+    const data = await this.getData();
+    const descriptions = data.map((recipe) => recipe.description);
+    return [...new Set(descriptions)];
+  }
 
-        return all;
-    }
+  async getAll() {
+    const asyncFunctions = [
+      this.getTitles(),
+      this.getIngredients(),
+      this.getDescriptions(),
+    ];
+    const all = (await Promise.all(asyncFunctions)).reduce((accumulator, all) => {
+      all.forEach((all) => {
+        accumulator.push(all);
+      });
+      return [...new Set(accumulator)];
+    }, []);
+
+    return all;
+  }
 }
 
 export default Model;
