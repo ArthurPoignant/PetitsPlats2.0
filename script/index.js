@@ -26,6 +26,7 @@ function displayList(list, listName) {
   }
 }
 
+// Récupère les ustensils, les ingrédients et les appareils des recettes affichées
 function refreshList(list) {
   for (let i = 0; i < list.length; i++) {
     const newListAppliances = list.map((recipe) => recipe.appliance);
@@ -131,76 +132,7 @@ function deleteTag(icon) {
   tag.remove();
 }
 
-/* // Affiche les recettes en fonction des tags et de la recherche principale
-function displayRecipesByFilter(listRecipes) {
-    const searchInput = document.querySelector('#searchbar-banner').value.trim().toLowerCase();
-    let newRecipeArray = [];
-
-    for (const recipe of listRecipes) {
-        let recipeMatchesAllTags = true;
-
-        for (const tag of tagArray) {
-            let tagMatches = false;
-
-            if (recipe.appliance && recipe.appliance.toLowerCase().includes(tag.toLowerCase())) {
-                tagMatches = true;
-            }
-
-            if (!tagMatches) {
-                for (const ustensil of recipe.ustensils) {
-                    if (ustensil.toLowerCase().includes(tag.toLowerCase())) {
-                        tagMatches = true;
-                        break;
-                    }
-                }
-            }
-
-            if (!tagMatches) {
-                for (const ingredient of recipe.ingredients) {
-                    if (ingredient.ingredient.toLowerCase().includes(tag.toLowerCase())) {
-                        tagMatches = true;
-                        break;
-                    }
-                }
-            }
-
-            if (!tagMatches) {
-                recipeMatchesAllTags = false;
-                break;
-            }
-        }
-
-        if (recipeMatchesAllTags && containsSearchInput(recipe, searchInput)) {
-            newRecipeArray.push(recipe);
-        }
-    }
-
-    if (newRecipeArray.length === 0) {
-        displayError(tagArray);
-        displayNumberRecipes(newRecipeArray.length)
-    } else {
-        displayRecipes(newRecipeArray);
-    }
-}
-
-// Analyse si la recette contient le mot rechercher
-function containsSearchInput(recipe, searchInput) {
-    const recipeName = recipe.name.toLowerCase();
-    const recipeDescription = recipe.description.toLowerCase();
-
-    if (recipeName.includes(searchInput) || recipeDescription.includes(searchInput)) {
-        return true;
-    }
-
-    for (const ingredient of recipe.ingredients) {
-        if (ingredient.ingredient.toLowerCase().includes(searchInput)) {
-            return true;
-        }
-    }
-
-    return false;
-} */
-
+// Verifie si la recette contient le mot recherché ainsi que les tags
 function matchesFilter(recipe, searchInput) {
   const lowerCaseSearchInput = searchInput.toLowerCase();
   const lowerCaseRecipeName = recipe.name.toLowerCase();
@@ -234,6 +166,7 @@ function matchesFilter(recipe, searchInput) {
   return false;
 }
 
+// affiche les recettes après filtrage
 function displayRecipesByFilter(listRecipes) {
   const searchInput = document.querySelector('#searchbar-banner').value.trim().toLowerCase();
   const filteredRecipes = [];

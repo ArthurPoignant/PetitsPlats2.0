@@ -77,10 +77,6 @@ header {
   padding-left: 40px;
 }
 
-#searchbar-banner input {
-  padding-left: 40px;
-}
-
 .result-banner {
   display: none;
   flex-direction: column;
