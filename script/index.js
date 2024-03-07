@@ -132,7 +132,7 @@ function deleteTag(icon) {
   tag.remove();
 }
 
-// Verifie si la recette contient le mot recherché ainsi que les tags
+// Vérifie si la recette contient le mot recherché ainsi que les tags
 function matchesFilter(recipe, searchInput) {
   const lowerCaseSearchInput = searchInput.toLowerCase();
   const lowerCaseRecipeName = recipe.name.toLowerCase();
