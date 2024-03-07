@@ -138,31 +138,26 @@ function matchesFilter(recipe, searchInput) {
   const lowerCaseRecipeName = recipe.name.toLowerCase();
   const lowerCaseRecipeDescription = recipe.description.toLowerCase();
 
-  if (
-    lowerCaseRecipeName.includes(lowerCaseSearchInput)
-          || lowerCaseRecipeDescription.includes(lowerCaseSearchInput)
-          || recipe.ingredients.some(
-            (ingredient) => ingredient.ingredient.toLowerCase().includes(lowerCaseSearchInput),
-          )
-  ) {
-    for (const tag of tagArray) {
-      if (
-        !(
-          (recipe.appliance && recipe.appliance.toLowerCase().includes(tag.toLowerCase()))
-                      || recipe.ustensils.some(
-                        (ustensil) => ustensil.toLowerCase().includes(tag.toLowerCase()),
-                      )
-                      || recipe.ingredients.some(
-                        (ingredient) => ingredient.ingredient
-                          .toLowerCase().includes(tag.toLowerCase()),
-                      )
-        )
-      ) {
-        return false;
-      }
-    }
-    return true;
+  const nameMatch = lowerCaseRecipeName.includes(lowerCaseSearchInput);
+  const descriptionMatch = lowerCaseRecipeDescription.includes(lowerCaseSearchInput);
+  const ingredientMatch = recipe.ingredients.some(
+    (ingredient) => ingredient.ingredient.toLowerCase().includes(lowerCaseSearchInput),
+  );
+
+  if (nameMatch || descriptionMatch || ingredientMatch) {
+    const tagMatches = tagArray.every((tag) => {
+      const applianceMatch = recipe.appliance && recipe.appliance
+        .toLowerCase().includes(tag.toLowerCase());
+      const ustensilMatch = recipe.ustensils.some((ustensil) => ustensil
+        .toLowerCase().includes(tag.toLowerCase()));
+      const ingredientTagMatch = recipe.ingredients.some((ingredient) => ingredient.ingredient
+        .toLowerCase().includes(tag.toLowerCase()));
+      return applianceMatch || ustensilMatch || ingredientTagMatch;
+    });
+
+    return tagMatches;
   }
+
   return false;
 }
 
@@ -204,6 +199,8 @@ function searchbarManager(listRecipes) {
     const searchInputResult = e.target.value.trim().toLowerCase();
     if (searchInputResult.length >= 3) {
       displayRecipesByFilter(listRecipes);
+    } else {
+      displayRecipes(listRecipes);
     }
   });
 }
@@ -212,8 +209,6 @@ function searchbarManager(listRecipes) {
 function tagManager(listRecipes, listName) {
   const container = document.querySelector('.tag-section');
   const element = document.querySelector(`.result-${CSS.escape(listName)}`);
-  // eslint-disable-next-line no-unused-vars
-  let searchInput = document.querySelector('#searchbar-banner').innerText;
   element.addEventListener('click', (e) => {
     const value = e.target.innerText;
 
@@ -222,7 +217,7 @@ function tagManager(listRecipes, listName) {
       tagArray.push(value);
       displayRecipesByFilter(listRecipes, listName);
       addTagEventListeners(listRecipes, listName);
-      searchInput = '';
+      document.querySelector('#searchbar-banner').innerText = '';
     }
   });
 }
